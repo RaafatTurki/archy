@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+curl -fsSL https://raw.githubusercontent.com/RaafatTurki/archy/master/user_configuration.json -o user_configuration.json
+curl -fsSL https://raw.githubusercontent.com/RaafatTurki/archy/master/user_credentials.json -o user_credentials.json
+
+archinstall --config ./user_configuration.json --creds ./user_credentials.json

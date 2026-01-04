@@ -1,0 +1,41 @@
+{
+  "app_config": null,
+  "archinstall-language": "English",
+  "auth_config": null,
+  "bootloader_config": {
+    "bootloader": "Systemd-boot",
+    "removable": false,
+    "uki": false
+  },
+  "custom_commands": [
+    "curl -fsSL https://raw.githubusercontent.com/RaafatTurki/archy/master/chroot -o chroot.sh",
+    "chmod +x ./chroot.sh",
+    "./chroot.sh"
+  ],
+  "hostname": null,
+  "kernels": [
+    "linux",
+    "linux-zen"
+  ],
+  "locale_config": {
+    "kb_layout": "us",
+    "sys_enc": "UTF-8",
+    "sys_lang": "en_US.UTF-8"
+  },
+  "network_config": {
+    "type": "nm"
+  },
+  "ntp": true,
+  "packages": [
+    "git"
+  ],
+  "parallel_downloads": 0,
+  "script": null,
+  "services": [],
+  "swap": {
+    "algorithm": "zstd",
+    "enabled": true
+  },
+  "timezone": "Asia/Baghdad",
+  "version": "3.0.15"
+}

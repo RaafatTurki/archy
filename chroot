@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+USER=potato
+AUR_HELPER=paru
+AUR_HELPER_PKG=paru-git
+
+
+# sudo setup
+if [[ "$(id -un)" == "root" ]]; then
+  sudo echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_wheel
+  sudo rm /etc/sudoers.d/00_${USER}
+fi
+
+# run the rest of the script as user
+if [[ "$(id -un)" != "$USER" ]]; then
+  exec sudo -u "$USER" bash "$0"
+fi
+
+# cd into home
+cd ~
+
+# install AUR helper
+git clone https://aur.archlinux.org/${AUR_HELPER_PKG}.git
+cd ${AUR_HELPER_PKG}
+makepkg -si --noconfirm
+cd ~
+rm -rf ${AUR_HELPER_PKG}
+
+# install AUR packages
+$AUR_HELPER -S yolk-bin neovim-git --skipreview --noconfirm
+
+# setup dots
+git clone https://github.com/RaafatTurki/dots.git .config/yolk
+cd .config/yolk
+git remote rm origin
+git remote add origin git@github.com:RaafatTurki/dots.git
+yolk sync
+cd ~
+
+# setup venom
+git clone https://github.com/RaafatTurki/venom.git .config/nvim
+cd .config/nvim
+git remote rm origin
+git remote add origin git@github.com:RaafatTurki/venom.git
+
